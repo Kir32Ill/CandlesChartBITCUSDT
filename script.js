@@ -4,12 +4,13 @@ const requestURL = "https://api-testnet.bybit.com/v5/market/kline",
     chartContainer = document.getElementById('chartContainer'),
     headerContainer = document.getElementById('headerContainer'),
     subTitle = document.getElementById('subTitle'),
+    loadingSpinner = document.getElementById('loadingSpinner'),
     parametres = {
         category: 'linear',
         symbol: 'BTCUSDT',
         interval: '5',
         limit: 40
-    };
+    },
     queryString = new URLSearchParams(parametres).toString(),
     fullUrl = `${requestURL}?${queryString}`;
 
@@ -18,31 +19,41 @@ let myChart = null;
 dataFromButtons.addEventListener('click', candles);
 
 async function candles() {
+    if (myChart) {
+        loadingSpinner.style.top = '50%';
+        loadingSpinner.style.display = 'block';
+    } else {
+        loadingSpinner.style.top = '75%';
+        loadingSpinner.style.display = 'block';
+    }
+
     if (chartContainer.classList.contains('visible')) {
         chartContainer.classList.remove('visible');
-        await new Promise( resolve => setTimeout(resolve, 300) );
+        await new Promise(resolve => setTimeout(resolve, 200));
     };
+
     const response = await fetch(fullUrl);
     if (!response.ok) {
         alert(`Ошибка: ${response.status} ${response.statusText}`)
         return;
     };
 
-    if ( !headerSection.classList.contains('small') ) {
+    if (!headerSection.classList.contains('small')) {
         headerSection.classList.add('small');
-        subTitle.textContent="Click again to update data and chart";
+        subTitle.textContent = "Click again to update data and chart";
     };
 
-    
+    loadingSpinner.style.display = 'none';
     chartContainer.style.display = 'block';
     setTimeout(() => {
         chartContainer.classList.add('visible');
     }, 10);
+
     const data = await response.json(),
         candles = data.result.list;
-        highPrices = candles.map(candle => parseFloat(candle[2])); // list[2]: highPrice
-        labels = candles.map((_, index) => `Candle ${index + 1}`);
-
+    highPrices = candles.map(candle => parseFloat(candle[2])); // list[2]: highPrice
+    labels = candles.map((_, index) => `Candle ${index + 1}`);
+    
     if (myChart) {
         myChart.data.labels = labels;
         myChart.data.datasets[0].data = highPrices;
@@ -52,17 +63,15 @@ async function candles() {
             type: 'line',
             data: {
                 labels: labels,
-                datasets: [
-                    {
-                        label: 'BTCUSDT High Price',
-                        data: highPrices,
-                        backgroundColor: 'rgba(255, 140, 66, 0.2)',
-                        borderColor: '#ff8c42',
-                        borderWidth: 1,
-                        pointBorderColor: '#000',
-                        pointBackgroundColor: '#ff8c42'
-                    },
-                ],
+                datasets: [{
+                    label: 'BTCUSDT High Price',
+                    data: highPrices,
+                    backgroundColor: 'rgba(255, 140, 66, 0.2)',
+                    borderColor: '#ff8c42',
+                    borderWidth: 1,
+                    pointBorderColor: '#000',
+                    pointBackgroundColor: '#ff8c42'
+                }, ],
             },
             options: {
                 scales: {
@@ -97,7 +106,6 @@ async function candles() {
         });
     }
 }
-
 const copy = document.getElementById("copyrights");
 let year = new Date();
 copy.textContent = `© ${year.getFullYear()} Golovanov Kirill`;
