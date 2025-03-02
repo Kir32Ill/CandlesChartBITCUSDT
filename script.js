@@ -53,7 +53,7 @@ async function candles() {
         candles = data.result.list;
     highPrices = candles.map(candle => parseFloat(candle[2])); // list[2]: highPrice
     labels = candles.map((_, index) => `Candle ${index + 1}`);
-    
+
     if (myChart) {
         myChart.data.labels = labels;
         myChart.data.datasets[0].data = highPrices;
@@ -74,6 +74,8 @@ async function candles() {
                 }, ],
             },
             options: {
+                responsive: true,
+                maintainAspectRatio: false,
                 scales: {
                     x: {
                         title: {

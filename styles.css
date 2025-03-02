@@ -33,6 +33,7 @@ body {
     transition: all 0.5s ease;
     width: 100%;
     text-align: center;
+    z-index: 10;
 }
 
 #headerSection.small {
@@ -62,7 +63,7 @@ body {
     width: 100%;
     max-width: 1000px;
     height: 60vh;
-    margin-top: 15px;
+    margin-top: 30px;
     padding: 10px;
     background-color: #2a2a40;
     border: 1px solid #3a3a4e;
@@ -70,6 +71,7 @@ body {
     overflow: hidden;
     opacity: 0;
     transition: opacity 0.3s ease;
+    z-index: 5;
 }
 
 #chartContainer.visible {
@@ -113,4 +115,5 @@ body {
     border-top: 1px solid #3a3a4e;
     margin-top: auto;
     position: relative;
+    z-index: 10
 }
