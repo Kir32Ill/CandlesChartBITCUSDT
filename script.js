@@ -1,14 +1,16 @@
 const requestURL = "https://api-testnet.bybit.com/v5/market/kline",
     dataFromButtons = document.querySelector('button'),
     ctx = document.getElementById('priceChart').getContext('2d'),
-    chartContainer = document.getElementById('chartContainer');
-    params = {
+    chartContainer = document.getElementById('chartContainer'),
+    headerContainer = document.getElementById('headerContainer'),
+    subTitle = document.getElementById('subTitle'),
+    parametres = {
         category: 'linear',
         symbol: 'BTCUSDT',
         interval: '5',
         limit: 40
     };
-    queryString = new URLSearchParams(params).toString(),
+    queryString = new URLSearchParams(parametres).toString(),
     fullUrl = `${requestURL}?${queryString}`;
 
 let myChart = null;
@@ -19,24 +21,23 @@ async function candles() {
     if (chartContainer.classList.contains('visible')) {
         chartContainer.classList.remove('visible');
         await new Promise( resolve => setTimeout(resolve, 300) );
-    }
+    };
+    const response = await fetch(fullUrl);
+    if (!response.ok) {
+        alert(`Ошибка: ${response.status} ${response.statusText}`)
+        return;
+    };
 
     if ( !headerSection.classList.contains('small') ) {
         headerSection.classList.add('small');
-    }
+        subTitle.textContent="Click again to update data and chart";
+    };
 
+    
     chartContainer.style.display = 'block';
     setTimeout(() => {
         chartContainer.classList.add('visible');
     }, 10);
-
-    const response = await fetch(fullUrl);
-    if (!response.ok) {
-        console.log('error');
-        alert(`Ошибка: ${response.status} ${response.statusText}`)
-        return;
-    }
-
     const data = await response.json(),
         candles = data.result.list;
         highPrices = candles.map(candle => parseFloat(candle[2])); // list[2]: highPrice
@@ -64,7 +65,6 @@ async function candles() {
                 ],
             },
             options: {
-                responsive: true,
                 scales: {
                     x: {
                         title: {
