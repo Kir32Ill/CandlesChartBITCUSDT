@@ -19,7 +19,7 @@
 
 1. **Клонируйте репозиторий**:
    ```bash
-   git clone https://github.com/ваш_username/название_репозитория.git
+   git clone https://github.com/Kir32Ill/CandlesChartBITCUSDT.git
 
 
 
@@ -27,7 +27,7 @@
 
 - Перейдите в папку проекта:
 ```bash
-cd название_репозитория
+cd CandlesChartBITCUSDT
 ```
 - Откройте файл index.html в браузере.
 
