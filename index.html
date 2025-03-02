@@ -11,13 +11,13 @@
     <script src="script.js" defer></script>
 </head>
 <body class="bg-dark-blue text-light">
-    <main class="container my-5">
-        <div class="text-center mb-4">
-            <h1 class="display-4 fw-bold text-soft-orange">Candles chart BTCUSDT</h1>
-            <p class="lead text-white-50">Click the button to get the data and plot the chart</p>
-            <button class="btn btn-soft-orange btn-lg">Get candles</button>
+    <main class="container">
+        <div class="text-center" id="headerSection">
+            <h1 class="display-4 fw-bold text-soft-orange" id="mainTitle">Candles chart BTCUSDT</h1>
+            <p class="lead text-white-50" id="subTitle">Click the button to get the data and plot the chart</p>
+            <button class="btn btn-soft-orange btn-lg" id="getDataButton">Get candles</button>
         </div>
-        <div id="chartContainer" class="shadow-lg p-3 mb-5 bg-dark-blue-light rounded">
+        <div id="chartContainer" class="shadow-lg p-3 mb-5 bg-dark-blue-light rounded" style="display: none;">
             <canvas id="priceChart"></canvas>
         </div>
     </main>
@@ -31,7 +31,7 @@
                 <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
                     <li class="ms-3">
                         <a class="text-soft-orange" href="https://t.me/KrGl89">
-                            <i class="bi bi-telegram" style="font-size: 2rem;"></i>
+                            <i class="bi bi-telegram" style="font-size: 3rem;"></i>
                         </a>
                     </li>
                 </ul>

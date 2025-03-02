@@ -2,6 +2,11 @@ body {
     font-family: 'Segoe UI', Verdana, sans-serif;
     background-color: #1a1a2e;
     color: #e0e0e0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+    position: relative; 
 }
 
 .text-soft-orange {
@@ -21,26 +26,65 @@ body {
     transform: translateY(-3px);
 }
 
+#headerSection {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: all 0.5s ease;
+    width: 100%;
+    text-align: center;
+}
+
+#headerSection.small {
+    top: 20px; 
+    transform: translateX(-50%);
+    transition: all 0.5s ease;
+}
+
+#headerSection.small #mainTitle {
+    font-size: 2.5rem;
+}
+
+#headerSection.small #subTitle {
+    font-size: 1.1rem;
+}
+
+#headerSection.small #getDataButton {
+    font-size: 1.1rem;
+    padding: 0.5rem 1rem;
+}
+
 #chartContainer {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    max-width: 1000px;
+    height: 60vh;
+    margin-top: 15px;;
+    padding: 20px;
     background-color: #2a2a40;
     border: 1px solid #3a3a4e;
     border-radius: 10px;
-    padding: 20px;
-    margin-top: 20px;
+    overflow: hidden;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 5;
 }
 
-
-.footer {
-    background-color: #1a1a2e;
-    border-top: 1px solid #3a3a4e;
+#chartContainer.visible {
+    opacity: 1;
 }
+
 
 @keyframes pulse {
     0% {
         transform: scale(1);
     }
     50% {
-        transform: scale(1.05);
+        transform: scale(1.1);
     }
     100% {
         transform: scale(1);
@@ -49,4 +93,12 @@ body {
 
 .btn-soft-orange:active {
     animation: pulse 0.3s ease;
+}
+
+.footer {
+    background-color: #1a1a2e;
+    border-top: 1px solid #3a3a4e;
+    margin-top: auto;
+    position: relative;
+    z-index: 10;
 }
