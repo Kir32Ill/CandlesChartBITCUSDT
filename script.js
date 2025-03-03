@@ -40,7 +40,7 @@ async function candles() {
 
     if (!headerSection.classList.contains('small')) {
         headerSection.classList.add('small');
-        subTitle.textContent = "Click again to update data and chart";
+        subTitle.textContent = "Click again to update the data and chart";
     };
 
     loadingSpinner.style.display = 'none';
@@ -51,7 +51,7 @@ async function candles() {
 
     const data = await response.json(),
         candles = data.result.list;
-    highPrices = candles.map(candle => parseFloat(candle[2])); // list[2]: highPrice
+    highPrices = candles.map(candle => parseFloat(candle[2])); //> list[2]: highPrice	string	Highest price
     labels = candles.map((_, index) => `Candle ${index + 1}`);
 
     if (myChart) {

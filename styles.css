@@ -60,7 +60,7 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 100%;
+    width: 95%;
     max-width: 1000px;
     height: 60vh;
     margin-top: 30px;
@@ -77,7 +77,6 @@ body {
 #chartContainer.visible {
     opacity: 1;
 }
-
 
 @keyframes pulse {
     0% {
@@ -116,4 +115,29 @@ body {
     margin-top: auto;
     position: relative;
     z-index: 10
+}
+
+@media (max-width: 768px) {
+    #chartContainer {
+        width: 95%; 
+        height: 60vh;
+        padding: 10px;
+    }
+
+    #headerSection.small {
+        top: 10px;
+    }
+
+    #headerSection.small #mainTitle {
+        font-size: 1.5rem;
+    }
+
+    #headerSection.small #subTitle {
+        font-size: 0.9rem;
+    }
+
+    #headerSection.small #getDataButton {
+        font-size: 0.9rem;
+        padding: 0.4rem 0.4rem;
+    }
 }
